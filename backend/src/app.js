@@ -15,7 +15,9 @@ app.get('/api/health', async (req, res) => {
 });
 
 app.use('/api/auth', require('./routes/authRoutes'));
-
+app.use('/api/admin', require('./routes/adminRoutes'));
+app.use('/api/stores', require('./routes/storeRoutes'));
+app.use('/api/owner', require('./routes/ownerRoutes'));
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ message: 'Internal server error' });
