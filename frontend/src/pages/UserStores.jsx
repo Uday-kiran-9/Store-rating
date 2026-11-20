@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api, { errorMessage } from '../api';
 import DataTable from '../components/DataTable';
+import Rating from '../components/Rating';
 import { useSort } from '../useSort';
 
 function RateCell({ store, onSaved }) {
@@ -46,11 +47,22 @@ export default function UserStores() {
     return () => clearTimeout(t);
   }, [search, sortBy, order, refresh]);
 
-  const columns = [
+    const columns = [
     { key: 'name', label: 'Store Name', sortable: true },
     { key: 'address', label: 'Address', sortable: true },
-    { key: 'overallRating', sortKey: 'rating', label: 'Overall Rating', sortable: true },
-    { key: 'myRating', label: 'Your Rating', render: (r) => r.myRating ?? 'Not rated' },
+    {
+      key: 'overallRating',
+      sortKey: 'rating',
+      label: 'Overall Rating',
+      sortable: true,
+      render: (r) => <Rating value={r.overallRating} />,
+    },
+    {
+      key: 'myRating',
+      label: 'Your Rating',
+      render: (r) =>
+        r.myRating ? <Rating value={r.myRating} /> : <span className="muted">Not rated</span>,
+    },
     {
       key: 'action',
       label: 'Rate',

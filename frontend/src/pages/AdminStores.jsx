@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import api, { errorMessage } from '../api';
 import DataTable from '../components/DataTable';
 import Field from '../components/Field';
+import Rating from '../components/Rating';
 import { useSort } from '../useSort';
 import { validate } from '../validation';
 
@@ -9,7 +10,12 @@ const columns = [
   { key: 'name', label: 'Name', sortable: true },
   { key: 'email', label: 'Email', sortable: true },
   { key: 'address', label: 'Address', sortable: true },
-  { key: 'rating', label: 'Rating', sortable: true },
+  {
+    key: 'rating',
+    label: 'Rating',
+    sortable: true,
+    render: (r) => <Rating value={r.rating} />,
+  },
 ];
 
 function StoreForm({ onCreated }) {

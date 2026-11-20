@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 
 const LINKS = {
@@ -20,8 +20,10 @@ export default function Layout({ children }) {
     <>
       <nav className="nav">
         <strong>Store Ratings</strong>
-        {(LINKS[user.role] || []).map(([to, label]) => (
-          <Link key={to} to={to}>{label}</Link>
+                {(LINKS[user.role] || []).map(([to, label]) => (
+          <NavLink key={to} to={to} end className={({ isActive }) => (isActive ? 'active' : '')}>
+            {label}
+          </NavLink>
         ))}
         <span className="spacer" />
         <Link to="/password">Change Password</Link>

@@ -8,7 +8,12 @@ const columns = [
   { key: 'name', label: 'Name', sortable: true },
   { key: 'email', label: 'Email', sortable: true },
   { key: 'address', label: 'Address', sortable: true },
-  { key: 'role', label: 'Role', sortable: true },
+  {
+    key: 'role',
+    label: 'Role',
+    sortable: true,
+    render: (r) => <span className={`badge ${r.role}`}>{r.role.replace('_', ' ')}</span>,
+  },
 ];
 
 export default function AdminUsers() {
